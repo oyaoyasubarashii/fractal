@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+   
+    <html>
+        
+        <head>
+            <title>Fractal World</title>
+            <script type="application/javascript">
+                function draw() {
+                  var canvas = document.getElementById("canvas");
+                  if (canvas.getContext) {
+                    var ctx = canvas.getContext("2d");
+                    
+                    ctx.fillStyle = "rgb(200,0,0)";
+                    ctx.fillRect(10,10,10,10)
+                    ctx.fillRect(100,100,10,10)
+                    var scale=400;
+                    var px=2,py=1;
+                    var imax=20;
+                    var x0,y0,xn,yn,xx,yy;
+                    for(var x=0;x<1200;x++){
+                        for(var y=0;y<800;y++){
+                             x0=x/scale-px;
+                             y0=y/scale-py;
+                             xn=0;
+                             yn=0;
+                            
+                             var i=0;
+
+                             while(i<imax){
+                                 xx=(xn+yn)*(xn-yn);
+                                 yy=2*xn+yn;
+                                 xn=xx+x0;
+                                 yn=yy+y0;
+                                 if(xn*xn+yn*yn>16){
+                                     break;
+                                 }
+                                 i++;
+                             }
+                             if(i==imax){
+                                ctx.fillStyle = "rgb(0,0,0)";
+                                ctx.fillRect(x,y,1,1)
+                             }
+                             else{
+                                ctx.fillStyle = 'rgb(' + i*i + ',' +i*i + ','+i*10+')';
+                                ctx.fillRect(x,y,1,1)
+                             }
+                            
+                        }
+                    }
+                  }
+                }
+                
+              </script>
+            
+        </head>
+        <style>
+
+            #nameplease{
+                background-image: linear-gradient(#e6646425,#9198e531);
+                padding:20px;
+            }
+
+            #givemeaidname{
+                background-color:darkolivegreen;
+                background-image: linear-gradient(#e66465,#9198e5);
+                color:hsl(343, 30%, 95%);
+                font-size:500%;
+                text-align: center;
+                padding: 5px;
+                border:wheat
+            }
+
+            #givemeaidnameplease{
+                font-size:150%;
+            }
+        </style>
+        
+        <body onload="draw();">
+            
+            <div id="nameplease">
+                <div id="givemeaidname">  Fractal World </div>
+                <p id="#givemeaidnameplease">
+                    Fractal Graph is beautiful and meaningful. Let's try!
+                </p>
+            </div>
+            <canvas id="canvas" width="1200" height="800"></canvas>
+        
+        </body>
+    
+    </html>
+
+
